@@ -1,5 +1,16 @@
-zle-line-init() if [[ $CONTEXT = start ]] LBUFFER=$zle_prefix$LBUFFER
-zle -N zle-line-init
+function _zsh-instant-repl_zle-line-init() {
+	# call wrapped zle-line-init if it exists
+	(( ! ${+widgets[._zsh-instant-repl_orig_zle-line-init]} )) || zle ._zsh-instant-repl_orig_zle-line-init $@
+	if [[ $CONTEXT = start ]]; then
+		LBUFFER=$zle_prefix$LBUFFER
+	fi
+}
 
-prime-zle-prefix() zle_prefix=$LBUFFER
+function prime-zle-prefix() {
+	zle_prefix=$LBUFFER
+}
+
+# wrap previous zle-line-init if it exists
+(( ! ${+widgets[zle-line-init]} )) || zle -A zle-line-init ._zsh-instant-repl_orig_zle-line-init
+zle -N zle-line-init _zsh-instant-repl_zle-line-init
 zle -N prime-zle-prefix
