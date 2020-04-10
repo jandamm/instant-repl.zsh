@@ -20,6 +20,16 @@ function _zsh-instant-repl_repl-set() {
 }
 zle -N repl-set _zsh-instant-repl_repl-set
 
+function _zsh-instant-repl_kill-whole-line() {
+	if [ "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
+		|| ([ -z "$LBUFFER" ] && [ -z "$INSTANT_REPL_TOGGLE_KILL_LINE" ]); then
+		zle kill-whole-line
+	else
+		zle kill-whole-line && _zsh-instant-repl_set-buffer
+	fi
+}
+zle -N repl-kill-whole-line _zsh-instant-repl_kill-whole-line
+
 function _zsh-instant-repl_backward-kill-line() {
 	if [ "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
 		|| ([ -z "$LBUFFER" ] && [ -z "$INSTANT_REPL_TOGGLE_KILL_LINE" ]); then
