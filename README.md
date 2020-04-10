@@ -76,9 +76,13 @@ Clears the REPL mode for the next prompt.
 Changes backward-kill-line (bash `^u`) to kill the line except the REPL. If only the REPL exists it clears the line.
 Configurable with `INSTANT_REPL_TOGGLE_KILL_LINE`.
 
+This can be used as a drop in replacement for backward-kill-line.
+
 #### repl-kill-whole-line
 Changes kill-whole-line (bash `^u`) to kill the line except the REPL. If only the REPL exists it clears the line.
 Configurable with `INSTANT_REPL_TOGGLE_KILL_LINE`.
+
+This can be used as a drop in replacement for kill-whole-line.
 
 ### Variables
 #### INSTANT_REPL_NO_AUTOFIX
