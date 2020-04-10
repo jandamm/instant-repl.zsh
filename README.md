@@ -42,7 +42,7 @@ bindkey '^u' repl-kill-whole-line # zsh default
 ```
 
 ## Configuration
-Here is a list of all functions you can bind keys to and variables to change the plugins behaviour.
+Here is a list of all functions you can bind keys to and variables to change the plugins behavior.
 
 ### ZLE functions
 You can use these functions with `bindkey [key] {function}`.
@@ -63,6 +63,9 @@ Changes kill-whole-line (bash `^u`) to kill the line except the REPL. If only th
 Configurable with `INSTANT_REPL_TOGGLE_KILL_LINE`.
 
 ### Variables
+#### INSTANT_REPL_NO_AUTOFIX
+By default there is exactly one space after the REPL when set via `repl-set`. If set, this behavior is disabled.
+
 #### INSTANT_REPL_PREFIX
 Represents the current REPL command.
 
