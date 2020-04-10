@@ -1,6 +1,24 @@
 # zsh-instant-repl
 Activate a REPL for any command in your current zsh session.
 
+## Motivation
+I started using [gitsh](https://github.com/thoughtbot/gitsh) a while ago and really liked to quickly navigate git.
+But the more I configured zsh the less fun it was to use `gitsh`.
+It lacked some completions, the prompt is way less configurable and using [fzf-tab](https://github.com/Aloxaf/fzf-tab) also feels way better than completion of `readline`.
+
+I jotted down what I'd need of zsh to be satisfied:
+1. Interpret every command as a `git` command
+2. Empty prompt is a default command (`git status`)
+3. Prompt showing the current git status
+
+The second and third point aren't a real problem.
+
+For the first point I've written this plugin.
+
+See my [dotfiles](https://github.com/jandamm/dotfiles/tree/master/zsh) for an implementation.
+
+See **Hints** for a short description.
+
 ## Installation
 See example below for more configuration
 
@@ -71,6 +89,30 @@ Represents the current REPL command.
 
 #### INSTANT_REPL_TOGGLE_KILL_LINE
 If set, `repl-backward-kill-line` and `repl-kill-whole-line` will restore the REPL if the prompt is empty.
+
+## Hints
+While it is nice to write some commands quicker, you can do more with it.
+
+As stated in **Motivation** I wanted to replace `gitsh` with this plugin.
+
+I call it `gsh` and for this I'm wrapping `repl-set` into another zle function:
+```zsh
+function repl-set-with-gsh() {
+	# Check if I'm currently using git in INSTANT_REPL_PREFIX
+	zle repl-set
+	if [ using_git ] && [ ! was_using_git ]; then
+		gsh_setup
+	elif [ was_using_git ]; then
+		gsh_unset
+	fi
+}
+```
+
+I also use a script to *start* gsh:
+```zsh
+INSTANT_REPL_PREFIX='git '
+gsh_setup
+```
 
 ## Credits
 This code derives from work of [Stéphane Chazelas](https://unix.stackexchange.com/users/22565/st%C3%A9phane-chazelas) posted [here](https://unix.stackexchange.com/a/555734/405149).
