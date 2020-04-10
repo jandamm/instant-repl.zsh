@@ -10,12 +10,12 @@ zinit light jandamm/zsh-instant-repl
 
 # This binds setting the REPL to Control-O
 # You can use this plugin without keybindings if you prefer.
-bindkey '^o' set-zle-repl
+bindkey '^o' repl-set
 ```
 
 ### manual
 - Clone and source `zsh-instant-repl.plugin.zsh`.
-- Set a key binding for `set-zle-repl`: `bindkey '^o' set-zle-repl`
+- Set a key binding for `repl-set`: `bindkey '^o' repl-set`
 
 ## Usage
 You have two ways to use this:
@@ -29,25 +29,25 @@ You have two ways to use this:
 
 ### By script/command
 
-Set the variable `ZSH_INSTANT_REPL_PREFIX` to your REPL command. (e.g. `git `)
+Set the variable `INSTANT_REPL_PREFIX` to your REPL command. (e.g. `git `)
 
 ## Example
 
 ```zsh
 zinit light jandamm/zsh-instant-repl
 
-bindkey '^o' set-zle-repl
+bindkey '^o' repl-set
 ```
 
 ## Configuration
 Here is a list of all functions you can bind keys to and variables to change the plugins behaviour.
 
 ### ZLE functions (usable for bindkey)
-#### set-zle-repl
+#### repl-set
 Sets the current prompt content to use for REPL mode.
 
 ### Variables
-#### ZSH_INSTANT_REPL_PREFIX
+#### INSTANT_REPL_PREFIX
 Represents the current REPL command.
 
 ## Credits
