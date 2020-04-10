@@ -44,9 +44,15 @@ bindkey '^u' repl-kill-whole-line # zsh default
 ## Configuration
 Here is a list of all functions you can bind keys to and variables to change the plugins behaviour.
 
-### ZLE functions (usable for bindkey)
+### ZLE functions
+You can use these functions with `bindkey [key] {function}`.
+In scripts you can use them `zle {function}`
+
 #### repl-set
 Sets the current prompt content to use for REPL mode.
+
+#### repl-clear
+Clears the REPL mode for the next prompt.
 
 #### repl-backward-kill-line
 Changes backward-kill-line (bash `^u`) to kill the line except the REPL. If only the REPL exists it clears the line.
