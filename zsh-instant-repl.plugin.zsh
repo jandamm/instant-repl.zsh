@@ -30,12 +30,14 @@ function _zsh-instant-repl_repl-clear() {
 zle -N repl-clear _zsh-instant-repl_repl-clear
 
 function _zsh-instant-repl_kill-whole-line() {
-	if [ -z "$INSTANT_REPL_PREFIX" ] \
-		|| [ "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
-		|| ([ -z "$LBUFFER" ] && [ -z "$INSTANT_REPL_TOGGLE_KILL_LINE" ]); then
-		zle kill-whole-line
+	if [[ "$LBUFFER" =~ $INSTANT_REPL_PREFIX* ]] \
+		&& [ ! "$BUFFER" = "$INSTANT_REPL_PREFIX" ] \
+		&& [ ! "$BUFFER " = "$INSTANT_REPL_PREFIX" ]; then
+		BUFFER=$INSTANT_REPL_PREFIX
+	elif [ -z "$BUFFER" ] && [ -n "$INSTANT_REPL_TOGGLE_KILL_LINE" ]; then
+		LBUFFER=$INSTANT_REPL_PREFIX
 	else
-		zle kill-whole-line && _zsh-instant-repl_set-buffer
+		zle kill-whole-line
 	fi
 }
 zle -N repl-kill-whole-line _zsh-instant-repl_kill-whole-line
