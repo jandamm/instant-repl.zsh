@@ -43,12 +43,14 @@ function _zsh-instant-repl_kill-whole-line() {
 zle -N repl-kill-whole-line _zsh-instant-repl_kill-whole-line
 
 function _zsh-instant-repl_backward-kill-line() {
-	if [ -z "$INSTANT_REPL_PREFIX" ] \
-		|| [ "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
-		|| ([ -z "$LBUFFER" ] && [ -z "$INSTANT_REPL_TOGGLE_KILL_LINE" ]); then
-		zle backward-kill-line
+	if [[ "$LBUFFER" =~ $INSTANT_REPL_PREFIX* ]] \
+		&& [ ! "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
+		&& [ ! "$LBUFFER " = "$INSTANT_REPL_PREFIX" ]; then
+		LBUFFER=$INSTANT_REPL_PREFIX
+	elif [ -z "$LBUFFER" ] && [ -n "$INSTANT_REPL_TOGGLE_KILL_LINE" ]; then
+		LBUFFER=$INSTANT_REPL_PREFIX
 	else
-		zle backward-kill-line && _zsh-instant-repl_set-buffer
+		zle backward-kill-line
 	fi
 }
 zle -N repl-backward-kill-line _zsh-instant-repl_backward-kill-line
