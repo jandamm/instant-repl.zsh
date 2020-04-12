@@ -35,7 +35,7 @@ function _zsh-instant-repl_kill-whole-line() {
 		&& [ ! "$BUFFER " = "$INSTANT_REPL_PREFIX" ]; then
 		BUFFER=$INSTANT_REPL_PREFIX
 	elif [ -z "$BUFFER" ] && [ -n "$INSTANT_REPL_TOGGLE_KILL_LINE" ]; then
-		LBUFFER=$INSTANT_REPL_PREFIX
+		LBUFFER=$INSTANT_REPL_PREFIX # Toggle if toggling is enabled
 	else
 		zle kill-whole-line
 	fi
@@ -48,7 +48,7 @@ function _zsh-instant-repl_backward-kill-line() {
 		&& [ ! "$LBUFFER " = "$INSTANT_REPL_PREFIX" ]; then
 		LBUFFER=$INSTANT_REPL_PREFIX
 	elif [ -z "$LBUFFER" ] && [ -n "$INSTANT_REPL_TOGGLE_KILL_LINE" ]; then
-		LBUFFER=$INSTANT_REPL_PREFIX
+		LBUFFER=$INSTANT_REPL_PREFIX # Toggle if toggling is enabled
 	else
 		zle backward-kill-line
 	fi
