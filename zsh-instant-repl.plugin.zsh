@@ -18,6 +18,8 @@ zle -N zle-line-init _zsh-instant-repl_zle-line-init
 function _zsh-instant-repl_repl-set() {
 	if [ -n "$INSTANT_REPL_NO_AUTOFIX" ]; then
 		INSTANT_REPL_PREFIX=$LBUFFER
+	elif [ -z "$LBUFFER" ]; then
+		INSTANT_REPL_PREFIX=''
 	else
 		INSTANT_REPL_PREFIX="$(echo $LBUFFER | sed 's/ *$//') "
 	fi
