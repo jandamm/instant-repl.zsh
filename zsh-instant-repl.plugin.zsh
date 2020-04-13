@@ -30,7 +30,8 @@ function _zsh-instant-repl_repl-clear() {
 zle -N repl-clear _zsh-instant-repl_repl-clear
 
 function _zsh-instant-repl_kill-whole-line() {
-	if [[ "$LBUFFER" =~ $INSTANT_REPL_PREFIX* ]] \
+	if [ -n "$INSTANT_REPL_PREFIX" ] \
+		&& [[ "$LBUFFER" =~ $INSTANT_REPL_PREFIX* ]] \
 		&& [ ! "$BUFFER" = "$INSTANT_REPL_PREFIX" ] \
 		&& [ ! "$BUFFER " = "$INSTANT_REPL_PREFIX" ]; then
 		BUFFER=$INSTANT_REPL_PREFIX
@@ -43,7 +44,8 @@ function _zsh-instant-repl_kill-whole-line() {
 zle -N repl-kill-whole-line _zsh-instant-repl_kill-whole-line
 
 function _zsh-instant-repl_backward-kill-line() {
-	if [[ "$LBUFFER" =~ $INSTANT_REPL_PREFIX* ]] \
+	if [ -n "$INSTANT_REPL_PREFIX" ] \
+		&& [[ "$LBUFFER" =~ $INSTANT_REPL_PREFIX* ]] \
 		&& [ ! "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
 		&& [ ! "$LBUFFER " = "$INSTANT_REPL_PREFIX" ]; then
 		LBUFFER=$INSTANT_REPL_PREFIX
