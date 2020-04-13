@@ -19,7 +19,7 @@ function _zsh-instant-repl_repl-set() {
 	if [ -n "$INSTANT_REPL_NO_AUTOFIX" ]; then
 		INSTANT_REPL_PREFIX=$LBUFFER
 	elif [ -z "$LBUFFER" ]; then
-		INSTANT_REPL_PREFIX=''
+		unset INSTANT_REPL_PREFIX
 	else
 		INSTANT_REPL_PREFIX="$(echo $LBUFFER | sed 's/ *$//') "
 	fi
@@ -27,7 +27,7 @@ function _zsh-instant-repl_repl-set() {
 zle -N repl-set _zsh-instant-repl_repl-set
 
 function _zsh-instant-repl_repl-clear() {
-	INSTANT_REPL_PREFIX=
+	unset INSTANT_REPL_PREFIX
 }
 zle -N repl-clear _zsh-instant-repl_repl-clear
 
