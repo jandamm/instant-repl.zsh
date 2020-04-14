@@ -58,3 +58,12 @@ function _zsh-instant-repl::repl-backward-kill-line() {
 	fi
 }
 zle -N repl-backward-kill-line _zsh-instant-repl::repl-backward-kill-line
+
+function _zsh-instant-repl::repl-redraw-prompt() {
+	local precmd
+	for precmd in $precmd_functions; do
+		$precmd
+	done
+	zle reset-prompt
+}
+zle -N repl-redraw-prompt _zsh-instant-repl::repl-redraw-prompt
