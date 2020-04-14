@@ -113,8 +113,10 @@ function repl-set-with-gsh() {
 	zle repl-set
 	if [ using_git ] && [ ! was_using_git ]; then
 		gsh_setup
+		zle repl-redraw-prompt
 	elif [ was_using_git ]; then
 		gsh_unset
+		zle repl-redraw-prompt
 	fi
 }
 ```
