@@ -87,6 +87,10 @@ Configurable with `INSTANT_REPL_TOGGLE_KILL_LINE`.
 
 This can be used as a drop in replacement for kill-whole-line.
 
+#### repl-redraw-prompt
+This zle function calls every precmd and then resets the prompt.
+Use this if you want to update the prompt for certain prefixes.
+
 ### Variables
 #### INSTANT_REPL_NO_AUTOFIX
 By default there is exactly one space after the REPL when set via `repl-set`. If set, this behavior is disabled.
