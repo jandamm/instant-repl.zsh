@@ -4,7 +4,7 @@ function _zsh-instant-repl::set-buffer() {
 
 function _zsh-instant-repl::zle-line-init() {
 	# call wrapped zle-line-init if it exists
-	(( ! ${+widgets[._zsh-instant-repl::orig-zle-line-init]} )) || zle ._zsh-instant-repl_orig-zle-line-init $@
+	(( ! ${+widgets[._zsh-instant-repl::orig-zle-line-init]} )) || zle ._zsh-instant-repl::orig-zle-line-init $@
 	local ret=$?
 	if [[ $CONTEXT = start ]]; then
 		_zsh-instant-repl::set-buffer
