@@ -64,7 +64,10 @@ Here is a list of all functions you can bind keys to and variables to change the
 
 ### ZLE functions
 You can use these functions with `bindkey [key] {function}`.
-In scripts you can use them `zle {function}`
+In functions you call from your own key binding functions you can use them like this: `zle {function}`.
+
+Every ZLE function is also provided as function with the prefix `_zsh-instant-repl::`.
+So calling `repl-set` from a script is possible via `_zsh-instant-repl::repl-set`.
 
 #### repl-set
 Sets the current prompt content to use for REPL mode.
