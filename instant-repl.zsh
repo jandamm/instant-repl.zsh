@@ -12,7 +12,7 @@ function _instant_repl::zle-line-init() {
 	return $ret
 }
 # wrap previous zle-line-init if it exists
-(( ! ${+widgets[zle-line-init]} )) || zle -A zle-line-init ._instant_repl::orig-zle-line-init
+zle -A zle-line-init ._instant_repl::orig-zle-line-init 2>/dev/null
 zle -N zle-line-init _instant_repl::zle-line-init
 
 function _instant_repl::repl-set() {
