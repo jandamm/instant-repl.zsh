@@ -13,10 +13,10 @@ zle -A zle-line-init ._instant_repl::orig-zle-line-init 2>/dev/null
 zle -N zle-line-init _instant_repl::zle-line-init
 
 function _instant_repl::repl-set() {
-	if [ -n "$INSTANT_REPL_NO_AUTOFIX" ]; then
-		INSTANT_REPL_PREFIX=$LBUFFER
-	elif [ -z "$LBUFFER" ]; then
+	if [ -z "$LBUFFER" ]; then
 		unset INSTANT_REPL_PREFIX
+	elif [ -n "$INSTANT_REPL_NO_AUTOFIX" ]; then
+		INSTANT_REPL_PREFIX=$LBUFFER
 	else
 		INSTANT_REPL_PREFIX="$(echo $LBUFFER | sed 's/ *$//') "
 	fi
