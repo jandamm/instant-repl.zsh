@@ -1,4 +1,4 @@
-# zsh-instant-repl
+# instant-repl.zsh
 Activate a REPL for any command in your current zsh session.
 
 ## Motivation
@@ -24,7 +24,7 @@ See example below for more configuration
 
 ### [zinit](https://github.com/zdharma/zinit)
 ```zsh
-zinit light jandamm/zsh-instant-repl
+zinit light jandamm/instant-repl.zsh
 
 # This binds setting the REPL to Control-O
 # You can use this plugin without keybindings if you prefer.
@@ -32,7 +32,7 @@ bindkey '^o' repl-set
 ```
 
 ### manual
-- Clone and source `zsh-instant-repl.plugin.zsh`.
+- Clone and source `instant-repl.zsh`.
 - Set a key binding for `repl-set`: `bindkey '^o' repl-set`
 
 ## Usage
@@ -52,7 +52,7 @@ Set the variable `INSTANT_REPL_PREFIX` to your REPL command. (e.g. `git `)
 ## Example
 
 ```zsh
-zinit light jandamm/zsh-instant-repl
+zinit light jandamm/instant-repl.zsh
 
 bindkey '^o' repl-set
 # bindkey '^u' repl-backward-kill-line
@@ -66,8 +66,8 @@ Here is a list of all functions you can bind keys to and variables to change the
 You can use these functions with `bindkey [key] {function}`.
 In functions you call from your own key binding functions you can use them like this: `zle {function}`.
 
-Every ZLE function is also provided as function with the prefix `_zsh-instant-repl::`.
-So calling `repl-set` from a script is possible via `_zsh-instant-repl::repl-set`.
+Every ZLE function is also provided as function with the prefix `_instant_repl::`.
+So calling `repl-set` from a script is possible via `_instant_repl::repl-set`.
 
 #### repl-set
 Sets the current prompt content to use for REPL mode.
