@@ -62,6 +62,8 @@ bindkey '^u' repl-kill-whole-line # zsh default
 ## Configuration
 Here is a list of all functions you can bind keys to and variables to change the plugins behavior.
 
+Everything that is not listed here is considered implementation detail and should be treated as such.
+
 ### ZLE functions
 You can use these functions with `bindkey [key] {function}`.
 In functions you call from your own key binding functions you can use them like this: `zle {function}`.
