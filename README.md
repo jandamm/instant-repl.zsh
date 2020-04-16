@@ -1,6 +1,9 @@
 # instant-repl.zsh
 Activate a REPL for any command in your current zsh session.
 
+This plugin is very lightweight. It's source code is shorter than this readme :)
+It does not add any keybindings. It's up to you to choose the bindings. If you don't have any preferences or feel overwhelmed by this customization options, just stick to the **Example**.
+
 ## Motivation
 I started using [gitsh](https://github.com/thoughtbot/gitsh) a while ago and really liked to quickly navigate git.
 But the more I configured zsh the less fun it was to use `gitsh`.
