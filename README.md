@@ -57,6 +57,7 @@ zinit light jandamm/instant-repl.zsh
 bindkey '^o' repl-set
 # bindkey '^u' repl-backward-kill-line
 bindkey '^u' repl-kill-whole-line # zsh default
+# bindkey '^u' repl-kill-whole-line-toggle # zsh default, restores prefix when pressing with empty prompt.
 ```
 
 ## Configuration
