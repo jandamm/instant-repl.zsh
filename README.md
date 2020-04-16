@@ -79,15 +79,19 @@ Clears the REPL mode for the next prompt.
 
 #### repl-backward-kill-line
 Changes backward-kill-line (bash `^u`) to kill the line except the REPL. If only the REPL exists it clears the line.
-Configurable with `INSTANT_REPL_TOGGLE_KILL_LINE`.
 
 This can be used as a drop in replacement for backward-kill-line.
 
+#### repl-backward-kill-line-toggle
+See `repl-backward-kill-line`. When the prompt is empty this function will set the prompt to the prefix.
+
 #### repl-kill-whole-line
 Changes kill-whole-line (bash `^u`) to kill the line except the REPL. If only the REPL exists it clears the line.
-Configurable with `INSTANT_REPL_TOGGLE_KILL_LINE`.
 
 This can be used as a drop in replacement for kill-whole-line.
+
+#### repl-kill-whole-line-toggle
+See `repl-kill-whole-line`. When the prompt is empty this function will set the prompt to the prefix.
 
 #### repl-redraw-prompt
 This zle function calls every precmd and then resets the prompt.
@@ -99,9 +103,6 @@ By default there is exactly one space after the REPL when set via `repl-set`. If
 
 #### INSTANT_REPL_PREFIX
 Represents the current REPL command.
-
-#### INSTANT_REPL_TOGGLE_KILL_LINE
-If set, `repl-backward-kill-line` and `repl-kill-whole-line` will restore the REPL if the prompt is empty.
 
 ## Hints
 While it is nice to write some commands quicker, you can do more with it.
