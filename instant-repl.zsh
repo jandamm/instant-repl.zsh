@@ -34,13 +34,20 @@ function _instant_repl::repl-kill-whole-line() {
 		&& [ ! "$BUFFER" = "$INSTANT_REPL_PREFIX" ] \
 		&& [ ! "$BUFFER " = "$INSTANT_REPL_PREFIX" ]; then
 			BUFFER=$INSTANT_REPL_PREFIX
-		elif [ -z "$BUFFER" ] && [ -n "$INSTANT_REPL_TOGGLE_KILL_LINE" ]; then
-			LBUFFER=$INSTANT_REPL_PREFIX # Toggle if toggling is enabled
 		else
 			zle kill-whole-line
 	fi
 }
 zle -N repl-kill-whole-line _instant_repl::repl-kill-whole-line
+
+function _instant_repl::repl-kill-whole-line-toggle() {
+	if [ -z "$BUFFER" ]; then
+		LBUFFER=$INSTANT_REPL_PREFIX # Toggle if toggling is enabled
+	else
+		_instant_repl::repl-kill-whole-line
+	fi
+}
+zle -N repl-kill-whole-line-toggle _instant_repl::repl-kill-whole-line-toggle
 
 function _instant_repl::repl-backward-kill-line() {
 	if [ -n "$INSTANT_REPL_PREFIX" ] \
@@ -48,13 +55,20 @@ function _instant_repl::repl-backward-kill-line() {
 		&& [ ! "$LBUFFER" = "$INSTANT_REPL_PREFIX" ] \
 		&& [ ! "$LBUFFER " = "$INSTANT_REPL_PREFIX" ]; then
 			LBUFFER=$INSTANT_REPL_PREFIX
-		elif [ -z "$LBUFFER" ] && [ -n "$INSTANT_REPL_TOGGLE_KILL_LINE" ]; then
-			LBUFFER=$INSTANT_REPL_PREFIX # Toggle if toggling is enabled
 		else
 			zle backward-kill-line
 	fi
 }
 zle -N repl-backward-kill-line _instant_repl::repl-backward-kill-line
+
+function _instant_repl::repl-backward-kill-line-toggle() {
+	if [ -z "$LBUFFER" ]; then
+		LBUFFER=$INSTANT_REPL_PREFIX # Toggle if toggling is enabled
+	else
+		_instant_repl::repl-backward-kill-line
+	fi
+}
+zle -N repl-backward-kill-line-toggle _instant_repl::repl-backward-kill-line-toggle
 
 function _instant_repl::repl-redraw-prompt() {
 	local precmd
