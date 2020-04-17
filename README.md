@@ -20,7 +20,7 @@ For the first point I've written this plugin.
 
 See my [dotfiles](https://github.com/jandamm/dotfiles/tree/master/zsh) for an implementation.
 
-See **Hints** for a short description.
+See [Hints](#hints) for a short description.
 
 ## Installation
 See example below for more configuration
@@ -111,7 +111,7 @@ Represents the current REPL command.
 ## Hints
 While it is nice to write some commands quicker, you can do more with it.
 
-As stated in **Motivation** I wanted to replace `gitsh` with this plugin.
+As stated in [Motivation](#motivation) I wanted to replace `gitsh` with this plugin.
 
 I call it `gsh` and for this I'm wrapping `repl-set` into another zle function:
 ```zsh
