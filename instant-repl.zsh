@@ -33,6 +33,9 @@ function _instant_repl::prefix() {
 		always) ;;
 		never) return ;;
 		equal_command) [ ! "${old_prefix%% *}" = "${INSTANT_REPL_PREFIX%% *}" ] || return ;;
+		matching_new) [[ ! "$old_prefix" =~ "$INSTANT_REPL_PREFIX*" ]] || return ;;
+		matching_old) [[ ! "$INSTANT_REPL_PREFIX" =~ "$old_prefix*" ]] || return ;;
+		matching) ([[ ! "$INSTANT_REPL_PREFIX" =~ "$old_prefix*" ]] && [[ ! "$old_prefix" =~ "$INSTANT_REPL_PREFIX*" ]]) || return ;;
 		*) [ ! "$old_prefix" = "$INSTANT_REPL_PREFIX" ] || return ;;
 	esac
 
