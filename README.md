@@ -74,6 +74,7 @@ In functions you call from your own key binding functions you can use them like 
 
 Every ZLE function is also provided as function with the prefix `_instant_repl::`.
 So calling `repl-set` from a script is possible via `_instant_repl::repl-set`.
+Calling ZLE functions wrapping other zle functions is not supported (e.g. repl-kill-whole-line), as they are calling zle widgets themselves.
 
 #### repl-set
 Sets the current prompt content to use for REPL mode.
