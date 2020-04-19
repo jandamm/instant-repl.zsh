@@ -91,6 +91,13 @@ This can be used as a drop in replacement for kill-whole-line.
 This zle function calls every precmd and then resets the prompt.
 Use this if you want to update the prompt for certain prefixes.
 
+### Hook
+There is a hook which is called every time after the prefix has changed. **Be aware that this is not true if you set the prefix by assigning the [variable](#INSTANT_REPL_PREFIX).**
+
+To use this hook define the function `instant_repl_prefix_hook`. You will get two parameters: The old prefix `$1` and the new prefix `$2`.
+
+By default the hook is **not** called if the prefix does not change.
+
 ### Variables
 #### INSTANT_REPL_NO_AUTOFIX
 By default there is exactly one space after the REPL when set via `repl-set`. If set, this behavior is disabled.
