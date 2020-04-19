@@ -26,15 +26,14 @@ function _instant_repl::prefix() {
 				INSTANT_REPL_PREFIX="$(echo $LBUFFER | sed 's/ *$//') "
 			fi
 			;;
-		clear)
-			unset INSTANT_REPL_PREFIX
-			;;
+		clear) unset INSTANT_REPL_PREFIX ;;
 	esac
 
-	if [ ! "$old_prefix" = "$INSTANT_REPL_PREFIX" ] \
-		&& (( ${+functions[instant_repl_prefix_hook]} )); then
-			instant_repl_prefix_hook "$old_prefix" "$INSTANT_REPL_PREFIX" >/dev/null
-	fi
+	case "$INSTANT_REPL_HOOK_FILTER" in
+		*) [ ! "$old_prefix" = "$INSTANT_REPL_PREFIX" ] || return ;;
+	esac
+
+	(( ${+functions[instant_repl_prefix_hook]} )) && instant_repl_prefix_hook "$old_prefix" "$INSTANT_REPL_PREFIX"
 }
 
 function _instant_repl::repl-set() {
