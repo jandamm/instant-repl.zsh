@@ -98,6 +98,18 @@ To use this hook define the function `instant_repl_prefix_hook`. You will get tw
 
 By default the hook is **not** called if the prefix does not change.
 
+You can customize this hooks filter by changing `INSTANT_REPL_HOOK_FILTER`:
+
+| Value | Behaviour |
+| --- | --- |
+| `equal` | Filter if the prefix hasn't changed (**default**) |
+| `always` | Do not filter at all (use your own filter) |
+| `never` | Turn hook off |
+| `equal_command` | Filter if the prefix up until the first space is equal |
+| `matching_old` | Filter if the new prefix begins with the old prefix |
+| `matching_new` | Filter if the old prefix begins with the new prefix |
+| `matching` | Filter if `matching_old` OR `matching_new` |
+
 ### Variables
 #### INSTANT_REPL_NO_AUTOFIX
 By default there is exactly one space after the REPL when set via `repl-set`. If set, this behavior is disabled.
