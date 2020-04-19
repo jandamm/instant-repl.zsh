@@ -113,6 +113,9 @@ You can customize this hooks filter by changing `INSTANT_REPL_HOOK_FILTER`. The 
 See [hints](#hints) for usage tips.
 
 ### Variables
+### INSTANT_REPL_HOOK_FILTER
+Defines when the hook should not be called. See [hook](#hook).
+
 #### INSTANT_REPL_NO_AUTOFIX
 By default there is exactly one space after the REPL when set via `repl-set`. If set, this behavior is disabled.
 
