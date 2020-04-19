@@ -30,6 +30,8 @@ function _instant_repl::prefix() {
 	esac
 
 	case "$INSTANT_REPL_HOOK_FILTER" in
+		always) ;;
+		never) return ;;
 		*) [ ! "$old_prefix" = "$INSTANT_REPL_PREFIX" ] || return ;;
 	esac
 
