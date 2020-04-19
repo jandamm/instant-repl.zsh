@@ -98,7 +98,7 @@ To use this hook define the function `instant_repl_prefix_hook`. You will get tw
 
 By default the hook is **not** called if the prefix does not change.
 
-You can customize this hooks filter by changing `INSTANT_REPL_HOOK_FILTER`:
+You can customize this hooks filter by changing `INSTANT_REPL_HOOK_FILTER`. The current filter is evaluated every time, so you can change it every time.
 
 | Value | Behaviour |
 | --- | --- |
@@ -109,6 +109,8 @@ You can customize this hooks filter by changing `INSTANT_REPL_HOOK_FILTER`:
 | `matching_old` | Filter if the new prefix begins with the old prefix |
 | `matching_new` | Filter if the old prefix begins with the new prefix |
 | `matching` | Filter if `matching_old` OR `matching_new` |
+
+See [hints](#hints) for usage tips.
 
 ### Variables
 #### INSTANT_REPL_NO_AUTOFIX
@@ -139,6 +141,21 @@ function instant_repl_prefix_hook() {
 			gsh_setup
 			zle repl-redraw-prompt
 		;;
+	esac
+}
+```
+I filter this hook using `equal_command`. This is working nicely with git, as the command won't change while using gsh.
+
+If you're using instant-repl with docker you'll often have `sudo docker` as prefix.
+You could start with `equal` and switch to `matching` when the prefix changes to `sudo docker` and to `equal_command` when the prefix is `git`:
+
+```zsh
+function instant_repl_prefix_hook() {
+	# Change your shell
+	case $2 in
+	sudo docker*) INSTANT_REPL_HOOK_FILTER=matching ;;
+	git*) INSTANT_REPL_HOOK_FILTER=equal_command ;;
+	*) INSTANT_REPL_HOOK_FILTER=equal ;;
 	esac
 }
 ```
