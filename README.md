@@ -125,18 +125,21 @@ While it is nice to write some commands quicker, you can do more with it.
 
 As stated in **Motivation** I wanted to replace `gitsh` with this plugin.
 
-I call it `gsh` and for this I'm wrapping `repl-set` into another zle function:
+I call it `gsh` and for this I'm using the [hook](#hook).
 ```zsh
-function repl-set-with-gsh() {
-	# Check if I'm currently using git in INSTANT_REPL_PREFIX
-	zle repl-set
-	if [ using_git ] && [ ! was_using_git ]; then
-		gsh_setup
-		zle repl-redraw-prompt
-	elif [ was_using_git ]; then
-		gsh_unset
-		zle repl-redraw-prompt
-	fi
+function instant_repl_prefix_hook() {
+	case $1 in
+		git*)
+			gsh_unset
+			zle repl-redraw-prompt
+		;;
+	esac
+	case $2 in
+		git*)
+			gsh_setup
+			zle repl-redraw-prompt
+		;;
+	esac
 }
 ```
 
