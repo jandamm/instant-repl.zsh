@@ -12,19 +12,43 @@ function _instant_repl::zle-line-init() {
 zle -A zle-line-init ._instant_repl::orig-zle-line-init 2>/dev/null
 zle -N zle-line-init _instant_repl::zle-line-init
 
+function _instant_repl::prefix() {
+	local old_prefix
+	old_prefix="$INSTANT_REPL_PREFIX"
+
+	case $1 in
+		set)
+			if [ -z "$LBUFFER" ]; then
+				unset INSTANT_REPL_PREFIX
+			elif [ -n "$INSTANT_REPL_NO_AUTOFIX" ]; then
+				INSTANT_REPL_PREFIX=$LBUFFER
+			else
+				INSTANT_REPL_PREFIX="$(echo $LBUFFER | sed 's/ *$//') "
+			fi
+			;;
+		clear) unset INSTANT_REPL_PREFIX ;;
+	esac
+
+	case "$INSTANT_REPL_HOOK_FILTER" in
+		always) ;;
+		never) return ;;
+		equal_command) [ ! "${old_prefix%% *}" = "${INSTANT_REPL_PREFIX%% *}" ] || return ;;
+		matching_new) [[ ! "$old_prefix" =~ "$INSTANT_REPL_PREFIX*" ]] || return ;;
+		matching_old) [[ ! "$INSTANT_REPL_PREFIX" =~ "$old_prefix*" ]] || return ;;
+		matching) ([[ ! "$INSTANT_REPL_PREFIX" =~ "$old_prefix*" ]] && [[ ! "$old_prefix" =~ "$INSTANT_REPL_PREFIX*" ]]) || return ;;
+		*) [ ! "$old_prefix" = "$INSTANT_REPL_PREFIX" ] || return ;;
+	esac
+
+	(( ${+functions[instant_repl_prefix_hook]} )) && instant_repl_prefix_hook "$old_prefix" "$INSTANT_REPL_PREFIX"
+}
+
 function _instant_repl::repl-set() {
-	if [ -z "$LBUFFER" ]; then
-		unset INSTANT_REPL_PREFIX
-	elif [ -n "$INSTANT_REPL_NO_AUTOFIX" ]; then
-		INSTANT_REPL_PREFIX=$LBUFFER
-	else
-		INSTANT_REPL_PREFIX="$(echo $LBUFFER | sed 's/ *$//') "
-	fi
+	_instant_repl::prefix set
 }
 zle -N repl-set _instant_repl::repl-set
 
 function _instant_repl::repl-clear() {
-	unset INSTANT_REPL_PREFIX
+	_instant_repl::prefix clear
 }
 zle -N repl-clear _instant_repl::repl-clear
 

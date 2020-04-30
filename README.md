@@ -102,7 +102,31 @@ See `repl-kill-whole-line`. When the prompt is empty this function will set the 
 This zle function calls every precmd and then resets the prompt.
 Use this if you want to update the prompt for certain prefixes.
 
+### Hook
+There is a hook which is called every time after the prefix has changed. **Be aware that this is not true if you set the prefix by assigning the [variable](#INSTANT_REPL_PREFIX).**
+
+To use this hook define the function `instant_repl_prefix_hook`. You will get two parameters: The old prefix `$1` and the new prefix `$2`.
+
+By default the hook is **not** called if the prefix does not change.
+
+You can customize this hooks filter by changing `INSTANT_REPL_HOOK_FILTER`. The current filter is evaluated every time, so you can change it every time.
+
+| Value | Behaviour |
+| --- | --- |
+| `equal` | Filter if the prefix hasn't changed (**default**) |
+| `always` | Do not filter at all (use your own filter) |
+| `never` | Turn hook off |
+| `equal_command` | Filter if the prefix up until the first space is equal |
+| `matching_old` | Filter if the new prefix begins with the old prefix |
+| `matching_new` | Filter if the old prefix begins with the new prefix |
+| `matching` | Filter if `matching_old` OR `matching_new` |
+
+See [hints](#hints) for usage tips.
+
 ### Variables
+### INSTANT_REPL_HOOK_FILTER
+Defines when the hook should not be called. See [hook](#hook).
+
 #### INSTANT_REPL_NO_AUTOFIX
 By default there is exactly one space after the REPL when set via `repl-set`. If set, this behavior is disabled.
 
@@ -114,18 +138,36 @@ While it is nice to write some commands quicker, you can do more with it.
 
 As stated in [Motivation](#motivation) I wanted to replace `gitsh` with this plugin.
 
-I call it `gsh` and for this I'm wrapping `repl-set` into another zle function:
+I call it `gsh` and for this I'm using the [hook](#hook).
 ```zsh
-function repl-set-with-gsh() {
-	# Check if I'm currently using git in INSTANT_REPL_PREFIX
-	zle repl-set
-	if [ using_git ] && [ ! was_using_git ]; then
-		gsh_setup
-		zle repl-redraw-prompt
-	elif [ was_using_git ]; then
-		gsh_unset
-		zle repl-redraw-prompt
-	fi
+function instant_repl_prefix_hook() {
+	case $1 in
+		git*)
+			gsh_unset
+			zle repl-redraw-prompt
+		;;
+	esac
+	case $2 in
+		git*)
+			gsh_setup
+			zle repl-redraw-prompt
+		;;
+	esac
+}
+```
+I filter this hook using `equal_command`. This is working nicely with git, as the command won't change while using gsh.
+
+If you're using instant-repl with docker you'll often have `sudo docker` as prefix.
+You could start with `equal` and switch to `matching` when the prefix changes to `sudo docker` and to `equal_command` when the prefix is `git`:
+
+```zsh
+function instant_repl_prefix_hook() {
+	# Change your shell
+	case $2 in
+	sudo docker*) INSTANT_REPL_HOOK_FILTER=matching ;;
+	git*) INSTANT_REPL_HOOK_FILTER=equal_command ;;
+	*) INSTANT_REPL_HOOK_FILTER=equal ;;
+	esac
 }
 ```
 
