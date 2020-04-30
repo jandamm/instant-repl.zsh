@@ -22,6 +22,20 @@ See my [dotfiles](https://github.com/jandamm/dotfiles/tree/master/zsh) for an im
 
 See [Hints](#hints) for a short description.
 
+## Content
+
+- [Description](#instant-replzsh)
+- [Motivation](#Motivation)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Example](#Example)
+- [Configuration](#Configuration)
+  - [ZLE functions](#ZLE-functions)
+  - [Hook](#Hook)
+  - [Variables](#Variables)
+- [Hints](#Hints)
+- [Credits](#Credits)
+
 ## Installation
 See example below for more configuration
 
