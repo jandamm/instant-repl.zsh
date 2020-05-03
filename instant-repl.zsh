@@ -3,7 +3,7 @@ function _instant_repl::zle-line-init() {
 	# call wrapped zle-line-init if it exists
 	(( ! ${+widgets[._instant_repl::orig-zle-line-init]} )) || zle ._instant_repl::orig-zle-line-init $@
 	ret=$?
-	if [[ $CONTEXT = start ]]; then
+	if [[ $CONTEXT = start ]] && [ -z "$BUFFER" ]; then
 		LBUFFER=$INSTANT_REPL_PREFIX$LBUFFER
 	fi
 	return $ret
