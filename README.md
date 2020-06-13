@@ -5,6 +5,8 @@ Activate a REPL for any command in your current zsh session.
 This plugin is very lightweight. It's source code is shorter than this readme :)
 It does not add any keybindings. It's up to you to choose the bindings. If you don't have any preferences or feel overwhelmed by this customization options, just stick to the [Example](#example).
 
+[![asciicast](https://asciinema.org/a/n6z99YsOoPHQCNkVtnG3ErKFH.svg)](https://asciinema.org/a/n6z99YsOoPHQCNkVtnG3ErKFH)
+
 ## Motivation
 
 I started using [gitsh](https://github.com/thoughtbot/gitsh) a while ago and really liked to quickly navigate git.
