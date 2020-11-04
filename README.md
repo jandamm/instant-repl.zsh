@@ -23,7 +23,7 @@ The second and third point aren't a real problem.
 
 For the first point I've written this plugin.
 
-See my [dotfiles](https://github.com/jandamm/dotfiles/tree/master/zsh) for an implementation.
+See my [dotfiles](https://github.com/jandamm/dotfiles/tree/master/zsh/.config/zsh) for an implementation.
 
 See [Hints](#hints) for a short description.
 
